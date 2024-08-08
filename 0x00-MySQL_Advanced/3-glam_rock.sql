@@ -10,7 +10,7 @@ CREATE TEMPORARY TABLE `life` AS
 SELECT band_name,
   (IFNULL(split, '2022') - formed) AS lifespan
 FROM metal_bands
-where style = 'Glam rock';
+where style LIKE '%Glam rock%';
 SELECT *
 FROM `life`
 ORDER BY lifespan desc;
