@@ -9,16 +9,13 @@ BEGIN
   IF NEW.`email` IS NULL THEN
     SET NEW.`valid_email` = 0;
   ELSEIF NEW.`email` != OLD.`email` THEN
-    -- let's make the checker happy
-    -- BEGIN
-    --   SET @e1 = REGEXP_REPLACE(NEW.`email`, '\\+.*@','@');
-    --   SET @e2 = REGEXP_REPLACE(OLD.`email`, '\\+.*@','@');
-    --   IF @e1 != @e2 THEN
-    --     SET NEW.`valid_email` = 0;
-    --   END IF;
-    -- END;
-    
-    SET NEW.`valid_email` = 0;
+    BEGIN
+      SET @e1 = REGEXP_REPLACE(NEW.`email`, '\\+.*@','@');
+      SET @e2 = REGEXP_REPLACE(OLD.`email`, '\\+.*@','@');
+      IF @e1 != @e2 THEN
+        SET NEW.`valid_email` = 0;
+      END IF;
+    END;
   END IF;
 END//
 DELIMITER ;
