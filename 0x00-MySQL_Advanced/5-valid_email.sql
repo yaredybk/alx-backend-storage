@@ -10,8 +10,9 @@ BEGIN
     SET NEW.`valid_email` = 0;
   ELSEIF NEW.`email` != OLD.`email` THEN
     BEGIN
-      SET @base = REGEXP_REPLACE(NEW.`email`, '\\+.*@','@');
-      IF @base != OLD.`email` THEN
+      SET @e1 = REGEXP_REPLACE(NEW.`email`, '\\+.*@','@');
+      SET @e2 = REGEXP_REPLACE(OLD.`email`, '\\+.*@','@');
+      IF @e1 != @e2 THEN
         SET NEW.`valid_email` = 0;
       END IF;
     END;
