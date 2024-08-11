@@ -6,8 +6,15 @@ DELIMITER //
 CREATE TRIGGER `invalidate_email` AFTER UPDATE ON `users`
 FOR EACH ROW 
 BEGIN
-  IF NEW.`email` IS NULL OR NEW.`email` != OLD.`email` THEN
+  IF NEW.`email` IS NULL THEN
     SET NEW.`valid_email` = 0;
+  ELSEIF NEW.`email` != OLD.`email` THEN
+    BEGIN
+      SET @base = REGEXP_REPLACE(NEW.`email`, '\\+.*@','@');
+      IF @base != OLD.`email` THEN
+        SET NEW.`valid_email` = 0;
+      END IF;
+    END;
   END IF;
 END//
 DELIMITER ;
