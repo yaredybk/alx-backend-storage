@@ -4,6 +4,7 @@ Provide some stats about Nginx logs stored in MongoDB
 """
 from pymongo import MongoClient
 
+
 def nginx_stat:
   """
   first line: x logs where x is the number of documents in this collection
@@ -25,3 +26,6 @@ def nginx_stat:
   status_check = nginx_logs.count_documents({"path": "/status"})
   print(f"{status_check} status check")
   client.close()
+
+if __name__ == "__main__":
+  nginx_stat()
