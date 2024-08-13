@@ -2,4 +2,4 @@
 // in the collection school:
 // The script should update only document with  (all of them)
 // The update should add the attribute 'address' with the value “”
-db.school.updateOne({name:"Holberton school"},{$set:{address:"972 Mission street"}})
+db.school.updateMany({name:"Holberton school"},{$set:{address:"972 Mission street"}})
