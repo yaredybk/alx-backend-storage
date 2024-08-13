@@ -2,7 +2,6 @@
 """
 Filter the list of school having a specific topic.
 
-
 """
 
 
