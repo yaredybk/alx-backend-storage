@@ -26,7 +26,7 @@ class Cache:
     self._redis.set(id, data)
     return id
 
-  def get(self, key: str, fn: Optional[Callable[bytes], Any]) -> any:
+  def get(self, key: str, fn: Optional[Callable]) -> any:
       """Get stored value with a key
 
       convert the data to a desired format if 'fn' is provided
