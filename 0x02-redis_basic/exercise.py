@@ -16,6 +16,7 @@ def count_calls(method: Callable) -> Callable:
         return method(self,*args, **kwargs)
     return incr_wrapper
 
+@count_calls
 class Cache:
   """Basic cache in redis."""
 
