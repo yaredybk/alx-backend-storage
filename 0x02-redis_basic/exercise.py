@@ -5,6 +5,16 @@ Redis basic.
 import redis
 from uuid import uuid4
 from typing import Union, Callable, Any, Optional
+from functool import wraps
+
+
+def count_calls(method: Callable) -> Callable:
+    @wraps(method)
+    def incr_wrapper(self,*args, **kwargs):
+        counter_name = method.__qualname__
+        count = self._redis.incr(counter_name) or 0
+        return method(self,*args, **kwargs)
+    return incr_wrapper
 
 class Cache:
   """Basic cache in redis."""
